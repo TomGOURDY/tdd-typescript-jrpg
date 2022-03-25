@@ -3,12 +3,14 @@ export class Player {
     private health: number;
     private readonly defense: number;
     protected readonly attack: number;
+    protected canAttack: boolean;
 
     constructor(name, health, defense, attack) {
         this.name = name;
         this.health = health;
         this.defense = defense;
         this.attack = attack;
+        this.canAttack = true;
     }
 
 
@@ -34,9 +36,13 @@ export class Player {
         }
     }
 
+    setCanAttack(canAttack: boolean): void {
+        this.canAttack = canAttack;
+    }
+
     attackPlayer(player: Player): void {
         let playerHealth = player.getHealth();
-        if (this.attack > player.getDefense()) {
+        if (this.attack > player.getDefense() && this.canAttack) {
             let damage = this.attack - player.defense;
             player.setHealth(playerHealth - damage);
         }
@@ -45,5 +51,6 @@ export class Player {
     isAlive() {
         return this.health > 0;
     }
+
 }
 
