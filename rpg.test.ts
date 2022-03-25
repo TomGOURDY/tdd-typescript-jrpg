@@ -9,7 +9,6 @@ import {Player} from "./Player";
     });
 });*/
 
-
 describe('PLAYER STATS', function () {
     it('should die when health gets to 0', function () {
         let player = new Player("Scout", 10, 2, 3);
@@ -51,5 +50,24 @@ describe('PLAYER INTERACTIONS', function () {
         let player2 = new Player("Mage", 9, 1, 4);
         player1.attackPlayer(player2);
         expect(player2.getHealth()).toBe(8);
+    });
+    it('each player should attack ennemy team members', function () {
+        const Team1: Array<Player> = [
+            new Player("Warrior", 20, 0, 3),
+            new Player("Ninja", 12, 0, 8),
+            new Player("Healer", 10, 0, 1),
+        ]
+        const Team2: Array<Player> = [
+            new Player("Warrior", 20, 0, 3),
+            new Player("Ninja", 12, 0, 8),
+            new Player("Healer", 10, 0, 1),
+        ]
+        for (let i = 0; i < Team1.length; i++) {
+            Team1[i].attackPlayer(Team2[i]);
+            Team2[i].attackPlayer(Team1[i]);
+        }
+        expect([Team1[0].getHealth(), Team1[1].getHealth(), Team1[2].getHealth(),
+                        Team2[0].getHealth(), Team2[1].getHealth(), Team2[2].getHealth()])
+            .toEqual([17, 4, 9, 17, 4, 9]);
     });
 });
