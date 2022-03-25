@@ -2,7 +2,7 @@ export class Player {
     private readonly name: string;
     private health: number;
     private readonly defense: number;
-    private readonly attack: number;
+    protected readonly attack: number;
 
     constructor(name, health, defense, attack) {
         this.name = name;
@@ -24,7 +24,7 @@ export class Player {
         this.health = health;
     }
 
-    getDefense() {
+    getDefense(): number {
         return this.defense;
     }
 
