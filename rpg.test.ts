@@ -1,4 +1,5 @@
 import {Player} from "./Player";
+import {Healer} from "./Classes/Healer";
 
 /*describe('Test function', function () {
     it('should be true when true given', function () {

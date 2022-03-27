@@ -4,6 +4,7 @@ export class Warrior extends Player {
 
     constructor(name, health, maxHealth, defense, attack) {
         super(name, health, maxHealth, defense, attack)
+
     }
 
     special(target: Player) {

@@ -1,5 +1,6 @@
 import { Player } from "./Player"
 import { Warrior } from "./Classes/Warrior"
+import {Healer} from "./Classes/Healer";
 import { Thief } from "./Classes/Thief"
 import { Barbarian } from "./Classes/Barbarian"
 import { Hunter } from "./Classes/Hunter"
@@ -20,6 +21,20 @@ describe('Special Moves', function() {
             expect(target.getHealth()).toBe(4)
         })
     })
+    describe('Healer', function () {
+        it('should be able to heal another player', function () {
+            let player1 = new Player("Tank", 15, 20, 4, 2);
+            let player2 = new Healer("Heal", 9, 9, 1, 4);
+            player2.healPlayer(player1);
+            expect(player1.getHealth()).toBe(20);
+        });
+        it('should be able to heal at double power', function () {
+            let player1 = new Player("Tank", 15, 25, 4, 2);
+            let player2 = new Healer("Heal", 9, 9, 1, 4);
+            player2.special(player1);
+            expect(player1.getHealth()).toBe(25);
+        });
+    });
     describe('Thief', function () {
         it('attack should do damage x 1.5', function() {
             const target = new Player('Target', 10, 10, 0, 0)

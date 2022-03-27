@@ -4,6 +4,7 @@ export class Player {
     protected maxHealth: number;
     private readonly defense: number;
     protected readonly attack: number;
+    protected canAttack: boolean;
 
     constructor(name, health, maxHealth, defense, attack) {
         this.name = name;
@@ -11,6 +12,7 @@ export class Player {
         this.maxHealth = maxHealth;
         this.defense = defense;
         this.attack = attack;
+        this.canAttack = true;
     }
 
     fakeCritical(): boolean {
@@ -61,13 +63,17 @@ export class Player {
         }
     }
 
+
+    setCanAttack(canAttack: boolean): void {
+        this.canAttack = canAttack;
+
     getMaxHealth() : number {
         return this.maxHealth
     }
 
     attackPlayer(player: Player): void {
         let playerHealth = player.getHealth();
-        if (this.attack > player.getDefense()) {
+        if (this.attack > player.getDefense() && this.canAttack) {
             let damage = this.attack - player.defense;
             player.setHealth(playerHealth - damage);
         }
@@ -76,9 +82,5 @@ export class Player {
     isAlive() {
         return this.health > 0;
     }
-
-
-
-
 }
 
