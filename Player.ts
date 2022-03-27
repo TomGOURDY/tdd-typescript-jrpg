@@ -1,18 +1,45 @@
 export class Player {
     private readonly name: string;
     private health: number;
+    protected maxHealth: number;
     private readonly defense: number;
     protected readonly attack: number;
     protected canAttack: boolean;
 
-    constructor(name, health, defense, attack) {
+    constructor(name, health, maxHealth, defense, attack) {
         this.name = name;
         this.health = health;
+        this.maxHealth = maxHealth;
         this.defense = defense;
         this.attack = attack;
         this.canAttack = true;
     }
 
+    fakeCritical(): boolean {
+        return true
+    }
+
+    realCritical(): boolean {
+        return Math.random() * 100 < 15;
+    }
+
+
+    critical(damage: number, type: string): number | Error {
+        if(type == "fake"){
+            return damage * 1.5
+        }
+        if(type == "real"){
+            if (this.realCritical()){
+                return damage * 1.5
+            }
+            else{
+                return damage
+            }
+        }
+        else{
+            return new Error("Wrong criticalRate")
+        }
+    }
 
     getName(): string {
         return this.name;
@@ -36,8 +63,12 @@ export class Player {
         }
     }
 
+
     setCanAttack(canAttack: boolean): void {
         this.canAttack = canAttack;
+
+    getMaxHealth() : number {
+        return this.maxHealth
     }
 
     attackPlayer(player: Player): void {
@@ -51,6 +82,5 @@ export class Player {
     isAlive() {
         return this.health > 0;
     }
-
 }
 
