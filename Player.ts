@@ -13,6 +13,31 @@ export class Player {
         this.attack = attack;
     }
 
+    fakeCritical(): boolean {
+        return true
+    }
+
+    realCritical(): boolean {
+        return Math.random() * 100 < 15;
+    }
+
+
+    critical(damage: number, type: string): number | Error {
+        if(type == "fake"){
+            return damage * 1.5
+        }
+        if(type == "real"){
+            if (this.realCritical()){
+                return damage * 1.5
+            }
+            else{
+                return damage
+            }
+        }
+        else{
+            return new Error("Wrong criticalRate")
+        }
+    }
 
     getName(): string {
         return this.name;
@@ -51,5 +76,9 @@ export class Player {
     isAlive() {
         return this.health > 0;
     }
+
+
+
+
 }
 
