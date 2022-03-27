@@ -11,26 +11,26 @@ import {Player} from "./Player";
 
 describe('PLAYER STATS', function () {
     it('should die when health gets to 0', function () {
-        let player = new Player("Scout", 10, 2, 3);
+        let player = new Player("Scout", 10, 10, 2, 3);
         player.takeDamage(12);
         console.log("bebouuuu  " + player.getHealth());
         expect(player.isAlive()).toBe(false);
     });
 
     it('should stay alive if not enough damage taken', function () {
-        let player = new Player("Scout", 10, 2, 3);
+        let player = new Player("Scout", 10, 10, 2, 3);
         player.takeDamage(5);
         expect(player.isAlive()).toBe(true);
     });
 
     it('should have the same name as given to the player', function () {
-        let player = new Player("Scout", 10, 2, 3);
+        let player = new Player("Scout", 10, 10, 2, 3);
         expect(player.getName()).toBe("Scout");
     });
 
     it('should take less damage depending on defense', function (){
         //given
-        let player = new Player("Scout", 10, 2, 3);
+        let player = new Player("Scout", 10, 10, 2, 3);
         //when
         player.takeDamage(5)
         //then
@@ -38,7 +38,7 @@ describe('PLAYER STATS', function () {
     })
 
     it('should not take damage when defense superior than attack', function (){
-        let player = new Player("Scout", 10, 2, 3);
+        let player = new Player("Scout", 10, 10, 2, 3);
         player.takeDamage(1)
         expect(player.getHealth()).toBe(10)
     })
@@ -46,21 +46,21 @@ describe('PLAYER STATS', function () {
 
 describe('PLAYER INTERACTIONS', function () {
     it('should be able to attack another player', function () {
-        let player1 = new Player("Tank", 15, 4, 2);
-        let player2 = new Player("Mage", 9, 1, 4);
+        let player1 = new Player("Tank", 15, 15, 4, 2);
+        let player2 = new Player("Mage", 9, 10, 1, 4);
         player1.attackPlayer(player2);
         expect(player2.getHealth()).toBe(8);
     });
     it('each player should attack ennemy team members', function () {
         const Team1: Array<Player> = [
-            new Player("Warrior", 20, 0, 3),
-            new Player("Ninja", 12, 0, 8),
-            new Player("Healer", 10, 0, 1),
+            new Player("Warrior", 20, 20, 0, 3),
+            new Player("Ninja", 12, 12, 0, 8),
+            new Player("Healer", 10, 10, 0, 1),
         ]
         const Team2: Array<Player> = [
-            new Player("Warrior", 20, 0, 3),
-            new Player("Ninja", 12, 0, 8),
-            new Player("Healer", 10, 0, 1),
+            new Player("Warrior", 20, 20, 0, 3),
+            new Player("Ninja", 12, 20, 0, 8),
+            new Player("Healer", 10, 20, 0, 1),
         ]
         for (let i = 0; i < Team1.length; i++) {
             Team1[i].attackPlayer(Team2[i]);
