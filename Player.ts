@@ -66,6 +66,8 @@ export class Player {
 
     setCanAttack(canAttack: boolean): void {
         this.canAttack = canAttack;
+    
+    }
 
     getMaxHealth() : number {
         return this.maxHealth
